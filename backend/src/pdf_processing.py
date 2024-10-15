@@ -12,17 +12,16 @@ class PDFProcessingError(Exception):
 def get_pdf_text(pdf_path: Path) -> list:
     # Set up Tesseract path
     system_name = platform.system()
-    if system_name == "Windows":
+    if system_name == "Linux":
+        poppler_path = "/usr/bin" 
+    elif system_name == "Windows":
         pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files (x86)/Tesseract-OCR/tesseract.exe"
         poppler_path = "dependency/poppler-21.11.0/Library/bin"
-    elif system_name == "Linux":
-        poppler_path = "/usr/bin"
     elif system_name == "Darwin":
         pytesseract.pytesseract.tesseract_cmd = r"/usr/local/bin/tesseract"
         poppler_path = "/usr/local/bin"
     else:
         raise PDFProcessingError("Unsupported operating system")
-
     if not pdf_path.suffix.lower() == '.pdf':
         raise PDFProcessingError("The provided file is not a PDF")
 

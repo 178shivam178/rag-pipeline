@@ -11,9 +11,6 @@ from typing import List
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-if openai.api_key is None:
-    raise ValueError("OpenAI API key not found. Please set it in the .env file as 'OPENAI_API_KEY'.")
-
 embedding_dim = 1536 
 index = faiss.IndexFlatL2(embedding_dim)  
 document_store = []

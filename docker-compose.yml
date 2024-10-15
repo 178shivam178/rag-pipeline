@@ -3,24 +3,24 @@ version: '3.8'
 services:
   api:
     build:
-      context: ./backend 
+      context: ./backend  # Path to your API Dockerfile
       dockerfile: Dockerfile
-    ports:
-      - "3008:3008" 
-    volumes: 
-      - ./backend:/app
-    env_file:
-      - .env 
-
-  ui:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "8501:8501"  
-    depends_on:
-      - api 
     volumes:
-      - ./frontend:/app  
+      - ./backend:/api # Path to your API source code
+    ports:
+      - "3008:3008"  # Expose API port
     env_file:
-      - .env  
+      - .env  # Load environment variables for the API
+
+  streamlit:
+    build:
+      context: ./frontend  # Path to your Streamlit Dockerfile
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/UI  # Path to your Streamlit source code
+    ports:
+      - "8501:8501"  # Expose Streamlit port
+    env_file:
+      - .env  # Load environment variables for Streamlit
+    depends_on:
+      - api  # Ensure the API service starts before the Streamlit app
