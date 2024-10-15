@@ -4,7 +4,7 @@ This project implements a **Retrieval-Augmented Generation (RAG)** system for an
 
 ## Live Project
 
-You can access the live application [here](https://20.39.198.211:8501/)
+You can access the live application [here]( http://20.39.198.211:8501/)
 
 
 ## Features
